@@ -5,6 +5,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
 import FaqSection from "<@>/components/FaqSection";
 import Footer from "<@>/components/Footer";
+import Link from "next/link";
 
 const page = () => {
   return (
@@ -30,8 +31,8 @@ const page = () => {
                 className="absolute top-1 md:top-2 right-3"
               />
             </div>
-            <button className="px-2 py-1 text-xs md:text-base md:px-4 md:py-2 rounded-md bg-red-600 text-white">
-              Sign In
+            <button className="px-2 py-1 text-xs md:text-base md:px-4 md:py-2 rounded-md bg-red-600 hover:bg-red-700 text-white">
+              <Link href="/in/login">Sign In</Link>
             </button>
           </div>
         </nav>
