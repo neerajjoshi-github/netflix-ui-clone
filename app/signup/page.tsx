@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { BsCheckLg } from "react-icons/bs";
 import { CgCheckO } from "react-icons/cg";
+import Button from "<@>/components/Button";
 
 const page = () => {
   return (
@@ -27,9 +28,7 @@ const page = () => {
         </p>
       </div>
       <Link href="/signup/planform" className="w-full">
-        <button className="bg-red-600 hover:bg-red-700 text-xl font-bold py-3 w-full rounded-md">
-          Next
-        </button>
+        <Button>Next</Button>
       </Link>
     </div>
   );

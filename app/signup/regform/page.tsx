@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "<@>/components/Input";
 import Link from "next/link";
+import Button from "<@>/components/Button";
 
 const page = () => {
   return (
@@ -30,9 +31,7 @@ const page = () => {
           type="password"
         />
         <Link href="/signup">
-          <button className="bg-red-600 hover:bg-red-700 text-xl font-bold py-3 w-full rounded-md">
-            Next
-          </button>
+          <Button>Next</Button>
         </Link>
       </div>
     </div>

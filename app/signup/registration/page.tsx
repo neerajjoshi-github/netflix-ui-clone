@@ -1,3 +1,4 @@
+import Button from "<@>/components/Button";
 import Link from "next/link";
 import React from "react";
 
@@ -25,10 +26,8 @@ const page = () => {
             Create a password to watch on any device at any time
           </p>
         </div>
-        <Link href="/signup/regform">
-          <button className="bg-red-600 hover:bg-red-700 text-xl font-bold py-3 w-full rounded-md">
-            Next
-          </button>
+        <Link href="/signup/regform" className="w-full">
+          <Button>Next</Button>
         </Link>
       </div>
     </div>
