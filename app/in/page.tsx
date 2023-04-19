@@ -72,7 +72,7 @@ const page = () => {
               loop
               playsInline
               muted
-              className="object-contain overflow-clip "
+              className="object-contain overflow-clip"
             ></video>
           </div>
         </div>

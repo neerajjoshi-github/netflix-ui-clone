@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const profilesData = [
   {
@@ -21,7 +22,13 @@ const profilesData = [
 
 const page = () => {
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="relative flex h-screen items-center justify-center">
+      <Link className="absolute top-4 left-4" href="/">
+        <div className="h-6 md:h-10 w-auto">
+          <img src="/logo.png" alt="Netflix logo" className="w-full h-full" />
+        </div>
+      </Link>
+
       <div>
         <div className="flex flex-col items-center gap-10">
           <h1 className="text-5xl font-semibold">Who's wacthing?</h1>
@@ -41,7 +48,7 @@ const page = () => {
               );
             })}
           </div>
-          <button className="text-lg w-[85%] px-4 py-2 border border-gray-300 ">
+          <button className="text-lg w-[85%] px-4 py-2 border border-gray-300 hover:bg-slate-900 ">
             Manage Profiles
           </button>
         </div>
