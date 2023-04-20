@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MovieCard from "./MovieCard";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { HiChevronDoubleRight } from "react-icons/hi";
+import ScrollableDiv from "./ScrollableDiv";
 
 const movies = async () => {
   const response = await fetch(
@@ -10,23 +13,25 @@ const movies = async () => {
 
 const MoviesList = async () => {
   const data = await movies();
-  //   console.log(data);
   return (
-    <div className="mt-8 p-6 px-16 cursor-pointer">
-      <h2 className="cursor-pointer group flex gap-2 items-end">
-        <span className="text-4xl font-semibold">See Again</span>
-        <span className="opacity-0 group-hover:opacity-100 -translate-x-14 group-hover:translate-x-0 transition duration-300">
+    <div className="mt-8 pl-10 pr-8">
+      <h2 className="flex gap-1 items-end">
+        <span className="cursor-pointer text-4xl peer font-semibold">
+          See Again
+        </span>
+        <span className="ml-2 text-lg opacity-0 peer-hover:opacity-100 -translate-x-14 peer-hover:translate-x-0 transition duration-300">
           Explore all
+        </span>
+        <span className="-translate-x-[85px] peer-hover:translate-x-0 transition duration-300">
+          <HiChevronDoubleRight className="w-7 h-7" />
         </span>
       </h2>
 
-      {/* <div className="overflow-x-hidden"> */}
-      <div className="mt-8 flex gap-8 overflow-x-auto mb-60 hide-scrollbar">
+      <ScrollableDiv>
         {data.results.map((movie: any) => {
           return <MovieCard data={movie} />;
         })}
-      </div>
-      {/* </div> */}
+      </ScrollableDiv>
     </div>
   );
 };

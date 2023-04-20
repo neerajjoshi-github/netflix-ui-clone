@@ -50,7 +50,7 @@ const DashboardNavbar = () => {
     <nav
       className={`${
         showBackground ? "bg-zinc-900/90 backdrop-blur-md " : "bg-transparent"
-      } fixed top-0 left-0 w-full z-40 max-sm:py-2 max-sm:px-2 py-4 px-10 flex items-center`}
+      } fixed top-0 left-0 transition duration-300 w-full z-40 max-sm:py-2 max-sm:px-2 py-4 px-10 flex items-center`}
     >
       <Link
         className="max-lg:absolute max-sm:top-6 max-lg:top-8 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:-translate-y-1/2"

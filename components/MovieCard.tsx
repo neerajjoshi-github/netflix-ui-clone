@@ -6,7 +6,7 @@ import { BiLike, BiDislike } from "react-icons/bi";
 const MovieCard = ({ data }: any) => {
   return (
     <div className="group relative">
-      <div className="group-hover:hidden w-[260px] h-[24vh]">
+      <div className="w-[280px] h-[24vh]">
         <img
           className="w-full h-full object-cover rounded-md"
           src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
@@ -37,8 +37,8 @@ const MovieCard = ({ data }: any) => {
           <div className="ml-auto w-6 h-6 p-[2px] flex items-center justify-center rounded-full border-2 border-white">
             <BsChevronDown className="w-full h-full" />
           </div>
-        </div> */}
-      {/* </div> */}
+        </div>
+      </div> */}
     </div>
   );
 };
