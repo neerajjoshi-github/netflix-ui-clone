@@ -5,8 +5,9 @@ import { IoMdAdd } from "react-icons/io";
 const Billboard = () => {
   return (
     <div className="relative h-[70vh] w-full">
+      <div className="w-full h-1/2 z-10 bg-black-gradient-down absolute bottom-0 left-0"></div>
       <video
-        className="w-full h-[70vh] object-cover brightness-75"
+        className="w-full h-[70vh] object-cover brightness-50"
         autoPlay
         muted
         loop

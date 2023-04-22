@@ -6,10 +6,6 @@ type ScrollableDivProps = {
   children: React.ReactNode;
 };
 
-type slideProps = {
-  scroll: "left" | "right";
-};
-
 const ScrollableDiv = ({ children }: ScrollableDivProps) => {
   const scrollableDiv = useRef<HTMLDivElement>(null);
   const [scrollEnd, setScrollEnd] = useState(false);
@@ -54,11 +50,11 @@ const ScrollableDiv = ({ children }: ScrollableDivProps) => {
   };
 
   return (
-    <div className="relative group ">
+    <div className="container relative group">
       {scrollX !== 0 && (
         <div
           onClick={() => slide("left")}
-          className="opacity-0 group-hover:opacity-100 flex transition duration-700 absolute z-10 bg-black/50 top-0 left-0 h-full items-center px-1"
+          className="cursor-pointer opacity-0 group-hover:opacity-100 flex transition duration-700 absolute z-10 bg-black/50 top-0 left-0 h-full items-center px-1"
         >
           <BsChevronLeft className="w-6 h-6" />
         </div>
@@ -66,7 +62,7 @@ const ScrollableDiv = ({ children }: ScrollableDivProps) => {
       {!scrollEnd && (
         <div
           onClick={() => slide("right")}
-          className="opacity-0 group-hover:opacity-100 flex transition duration-700 absolute z-10 bg-black/50 top-0 right-0 h-full items-center px-1"
+          className="cursor-pointer opacity-0 group-hover:opacity-100 flex transition duration-700 absolute z-10 bg-black/50 top-0 right-0 h-full items-center px-1"
         >
           <BsChevronRight className="w-6 h-6" />
         </div>
@@ -74,7 +70,7 @@ const ScrollableDiv = ({ children }: ScrollableDivProps) => {
       <div
         onScroll={scrollCheck}
         ref={scrollableDiv}
-        className="relative group scroll-smooth mt-8 flex gap-4 overflow-x-auto mb-60 hide-scrollbar"
+        className="carousel group scroll-smooth mt-6 sm:mt-8 flex gap-2 sm:gap-4 overflow-x-auto overflow-y-hidden hide-scrollbar"
       >
         {children}
       </div>

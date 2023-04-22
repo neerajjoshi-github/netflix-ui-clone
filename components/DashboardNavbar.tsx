@@ -10,12 +10,12 @@ import MobileMenu from "./MobileMenu";
 const TOP_OFFSET = 66;
 
 const navLinks = [
-  { title: "Home", herf: "/" },
-  { title: "TV Shows", herf: "/shows" },
-  { title: "Movies", herf: "/movies" },
-  { title: "New & Popular", herf: "/new" },
-  { title: "My List", herf: "/my_list" },
-  { title: "Browse by Languages", herf: "/browse_by_languages" },
+  { title: "Home", herf: "/dashboard" },
+  { title: "TV Shows", herf: "/dashboard/shows" },
+  { title: "Movies", herf: "/dashboard/movies" },
+  { title: "New & Popular", herf: "/dashboard/new" },
+  { title: "My List", herf: "/dashboard/my_list" },
+  { title: "Browse by Languages", herf: "/dashboard/browse_by_languages" },
 ];
 
 const DashboardNavbar = () => {
