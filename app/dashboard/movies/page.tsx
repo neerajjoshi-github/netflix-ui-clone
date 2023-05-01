@@ -1,13 +1,7 @@
 import ImageBillboard from "<@>/components/ImageBillboard";
-import MoviesList from "<@>/components/MoviesList";
+import MediaList from "<@>/components/MediaList";
 import React from "react";
-
-const fetchMovies = async (params: string) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${params}?api_key=${process.env.MOVIESDB_API_KEY}&language=en-US&page=1`
-  );
-  return response.json();
-};
+import { fetchMovies } from "<@>/lib/fetch";
 
 const page = async () => {
   const { results: popularMoviesResults }: MoviesData = await fetchMovies(
@@ -30,10 +24,10 @@ const page = async () => {
   return (
     <div className="pb-32">
       <ImageBillboard data={randomResult} />
-      <MoviesList movies={popularMoviesResults} title="Popular Movies" />
-      <MoviesList movies={topRatedMoviesResults} title="Top Rated Movies" />
-      <MoviesList movies={onAirMoviesResults} title="Newly Arrived" />
-      <MoviesList movies={upcomingMoviesResults} title="Upcoming Movies" />
+      <MediaList data={popularMoviesResults} title="Popular Movies" />
+      <MediaList data={topRatedMoviesResults} title="Top Rated Movies" />
+      <MediaList data={onAirMoviesResults} title="Newly Arrived" />
+      <MediaList data={upcomingMoviesResults} title="Upcoming Movies" />
     </div>
   );
 };

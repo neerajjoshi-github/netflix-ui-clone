@@ -1,13 +1,7 @@
 import ImageBillboard from "<@>/components/ImageBillboard";
-import MoviesList from "<@>/components/MoviesList";
+import MediaList from "<@>/components/MediaList";
 import React from "react";
-
-const fetchTv = async (params: string) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/tv/${params}?api_key=${process.env.MOVIESDB_API_KEY}&language=en-US&page=1`
-  );
-  return response.json();
-};
+import { fetchTv } from "<@>/lib/fetch";
 
 const page = async () => {
   const { results: popularShowsResults }: ShowsData = await fetchTv("popular");
@@ -21,9 +15,9 @@ const page = async () => {
   return (
     <div className="pb-32">
       <ImageBillboard data={randomResult} />
-      <MoviesList movies={popularShowsResults} title="Popular Shows" />
-      <MoviesList movies={topRatedShowsResults} title="Top Rated Shows" />
-      <MoviesList movies={onAirShowsResults} title="Airing Now" />
+      <MediaList data={popularShowsResults} title="Popular Shows" />
+      <MediaList data={topRatedShowsResults} title="Top Rated Shows" />
+      <MediaList data={onAirShowsResults} title="Airing Now" />
     </div>
   );
 };

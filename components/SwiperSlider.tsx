@@ -1,10 +1,23 @@
-import React from "react";
+import React, { FC } from "react";
 import { register } from "swiper/element/bundle";
-
 register();
 
-const SwiperSlider = () => {
-  return <div>SwiperSlider</div>;
+type SwiperSlideProps = {
+  children: React.ReactNode;
 };
 
-export default SwiperSlider;
+const SwiperSlide: FC<SwiperSlideProps> = ({ children }) => {
+  return (
+    <swiper-container
+      slides-per-view={4}
+      slides-per-group={4}
+      loop
+      space-between={15}
+      speed={500}
+    >
+      {children}
+    </swiper-container>
+  );
+};
+
+export default SwiperSlide;
