@@ -1,10 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { GoTriangleDown } from "react-icons/go";
 import { planFeatures, planOptions } from "<@>/data/plansGridData";
+import useStore from "<@>/store/store";
+
+type PlanOption = "mobile" | "basic" | "standard" | "premium";
 
 const PlansGrid = () => {
-  const [selectedPlan, setSelectedPlan] = useState("mobile");
+  const [selectedPlan, updateSelectedPlan] = useStore((state) => [
+    state.selectedPlan,
+    state.updateSelectedPlan,
+  ]);
+
   return (
     <div className="my-6 flex flex-col gap-4 sm:gap-6 relative">
       <div className="sticky top-0 py-2 bg-black flex item-center justify-center sm:justify-end gap-2 sm:gap-5">
@@ -24,7 +31,7 @@ const PlansGrid = () => {
                 name="plan"
                 className="hidden"
                 onChange={() => {
-                  setSelectedPlan(option.id);
+                  updateSelectedPlan(option.id);
                 }}
               />
               {selectedPlan === option.id && (
@@ -45,12 +52,12 @@ const PlansGrid = () => {
                 <td className="text-center w-full sm:text-left sm:flex-1">
                   {feature.title}
                 </td>
-                {feature.opions.map((option) => {
+                {feature.options.map((option) => {
                   return (
                     <td
                       key={option.id}
                       onClick={() => {
-                        setSelectedPlan(option.id);
+                        updateSelectedPlan(option.id);
                       }}
                       className={`${
                         selectedPlan === option.id

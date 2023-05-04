@@ -68,3 +68,10 @@ swiper-container:hover {
 swiper-container:hover > .swiper-button-next {
   background-color: aqua;
 } */
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+}
+input:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
+}

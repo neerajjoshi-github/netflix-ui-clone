@@ -1,7 +1,13 @@
 import { BsPhone, BsTabletLandscape, BsTv } from "react-icons/bs";
 import { RiComputerLine } from "react-icons/ri";
 
-export const planOptions = [
+export type PlanOptionType = {
+  key: number;
+  id: "mobile" | "basic" | "standard" | "premium";
+  label: string;
+};
+
+export const planOptions: PlanOptionType[] = [
   {
     key: 1,
     id: "mobile",
@@ -24,10 +30,20 @@ export const planOptions = [
   },
 ];
 
-export const planFeatures = [
+type OptionType = {
+  id: "mobile" | "basic" | "standard" | "premium";
+  name: string | JSX.Element;
+};
+
+export type PlanFeatureType = {
+  title: string;
+  options: OptionType[];
+};
+
+export const planFeatures: PlanFeatureType[] = [
   {
     title: "Monthly price",
-    opions: [
+    options: [
       {
         id: "mobile",
         name: "₹ 149",
@@ -48,7 +64,7 @@ export const planFeatures = [
   },
   {
     title: "Video quality",
-    opions: [
+    options: [
       {
         id: "mobile",
         name: "Good",
@@ -69,7 +85,7 @@ export const planFeatures = [
   },
   {
     title: "Resolution",
-    opions: [
+    options: [
       {
         id: "mobile",
         name: "480p",
@@ -90,7 +106,7 @@ export const planFeatures = [
   },
   {
     title: "Devices you can use to watch",
-    opions: [
+    options: [
       {
         id: "mobile",
         name: (

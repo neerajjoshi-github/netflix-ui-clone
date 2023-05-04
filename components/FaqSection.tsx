@@ -84,7 +84,7 @@ const items = [
 
 const FaqSection = () => {
   return (
-    <div className="h-auto flex flex-col gap-8 items-center pt-10 pb-20">
+    <div className="h-auto mb-4 flex flex-col gap-8 items-center pt-10 pb-20">
       <h2 className="text-2xl text-center sm:text-3xl md:text-4xl font-black">
         Frequently Asked Questions
       </h2>
@@ -98,11 +98,11 @@ const FaqSection = () => {
             <AccordionItem
               buttonProps={{
                 className: ({ isEnter }) =>
-                  `flex w-full p-4 text-left bg-[#2d2d2d] hover:bg-[#2d2d2d]`,
+                  `flex w-full p-4 text-left bg-slate-900 hover:bg-slate-800`,
               }}
               contentProps={{
                 className:
-                  "transition-height duration-200 ease-in-out bg-[#2d2d2d] mt-1",
+                  "transition-height duration-200 ease-in-out bg-slate-900 mt-1",
               }}
               panelProps={{ className: "p-4 " }}
               key={id}

@@ -1,8 +1,18 @@
 import ReactSelect from "react-select";
 
-const Select = ({ options, id }: any) => {
+const Select = ({
+  options,
+  register,
+  inputRef,
+  value,
+  onChange,
+  name,
+}: any) => {
   return (
     <ReactSelect
+      value={options.find((c) => c.value === value)}
+      onChange={(val) => onChange(val.value)}
+      inputId={inputRef}
       unstyled
       options={options}
       classNames={{

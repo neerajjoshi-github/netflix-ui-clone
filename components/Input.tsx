@@ -1,23 +1,38 @@
 "use client";
 import React from "react";
+import { RiCloseCircleLine } from "react-icons/ri";
 
 type InputProps = {
   label: string;
   type?: string;
   id: string;
   className?: string;
+  register: any;
+  errorMessage?: string;
+  touchedFlieds?: boolean;
 };
 
-const Input = ({ label, type, id, className }: InputProps) => {
+const Input = ({
+  label,
+  type,
+  id,
+  className,
+  register,
+  errorMessage,
+  touchedFlieds,
+}: InputProps) => {
   return (
     <div
-      className={`${className} relative rounded-md border-2 border-gray-400 focus-within:border-white`}
+      className={`${className}  focus:ring-0 relative rounded-lg p-px border-2 border-transparent  focus-within:border-white`}
     >
       <input
         id={id}
         type={type}
-        className={`peer block w-full h-full px-4 pt-7 pb-2  bg-transparent rounded-md outline-none`}
+        className={`${errorMessage ? "border-red-600" : ""} 
+        ${touchedFlieds && !errorMessage ? "border-green-600" : ""} 
+         border-gray-300 border placeholder:text-transparent peer block w-full h-full px-4 pt-7 pb-2  bg-transparent rounded-md outline-none`}
         placeholder=" "
+        {...register}
       />
       <label
         htmlFor={id}
@@ -25,6 +40,11 @@ const Input = ({ label, type, id, className }: InputProps) => {
       >
         {label}
       </label>
+      {errorMessage && (
+        <span className="absolute truncate -bottom-6 flex gap-2 items-center left-0 text-xs text-red-600 font-semibold">
+          <RiCloseCircleLine className="w-4 h-4" /> {errorMessage}
+        </span>
+      )}
     </div>
   );
 };
