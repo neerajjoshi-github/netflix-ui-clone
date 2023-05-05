@@ -8,42 +8,64 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { emailPassSchema } from "<@>/lib/zodObjects";
+import Link from "next/link";
+import axios, { AxiosError, isAxiosError } from "axios";
 
-type FormSchemaType = z.infer<typeof emailPassSchema>;
+const regFormSchema = emailPassSchema.extend({
+  userName: z
+    .string()
+    .min(1, "Userame is required!!")
+    .max(16, "Userame cannot be more than 16 character!!"),
+});
+
+type RegFormSchemaType = z.infer<typeof regFormSchema>;
 
 const page = () => {
   const router = useRouter();
   const [isFormSubmiting, setIsForomSubmiting] = useState(false);
+  const [axiosError, setAxiosError] = useState("");
   const [userEmail, updateUserEmail] = useStore((state) => [
     state.userEmail,
     state.updateUserEmail,
   ]);
+
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
-  } = useForm<FormSchemaType>({
+  } = useForm<RegFormSchemaType>({
+    resolver: zodResolver(regFormSchema),
+    mode: "onTouched",
     defaultValues: {
       userEmail: userEmail,
     },
-    resolver: zodResolver(emailPassSchema),
-    mode: "onTouched",
   });
 
-  const onRegFormSubmit: SubmitHandler<FormSchemaType> = (data) => {
+  const onRegFormSubmit: SubmitHandler<RegFormSchemaType> = async (data) => {
     setIsForomSubmiting(true);
     console.log(data);
-    router.push("/signup");
+    try {
+      await axios.post("/api/register", { data });
+      router.push("/signup");
+    } catch (error) {
+      if (isAxiosError(error)) {
+        setAxiosError(error.response?.data);
+      } else {
+        console.log(error);
+      }
+    } finally {
+      setIsForomSubmiting(false);
+    }
   };
+
   return (
     <div className="w-full h-full md:h-[90%] md:w-[540px] lg:h-[85%] px-8 py-12">
       <p className="uppercase text-sm">
         Step <span className="font-bold">1</span> of{" "}
         <span className="font-bold">3</span>
       </p>
-
       <form
-        onClick={handleSubmit(onRegFormSubmit)}
+        onSubmit={handleSubmit(onRegFormSubmit)}
         className="mt-4 flex flex-col gap-8"
       >
         <h2 className="text-3xl font-semibold">
@@ -52,23 +74,37 @@ const page = () => {
         <p className="text-xl">
           Just a few more steps and you're done! We hate paperwork, too.
         </p>
+        {axiosError && (
+          <span className="truncate flex gap-2 items-center text-sm text-red-600 font-semibold">
+            {axiosError}
+          </span>
+        )}
         <Input
-          className="w-full"
-          label="Email or phone number"
-          id="user_email"
+          register={register("userName")}
+          errorMessage={errors.userName?.message}
+          touchedFlieds={touchedFields.userName}
+          label="Username"
+          id="userName"
           type="text"
+          className="w-full"
+        />
+        <Input
           register={register("userEmail")}
           errorMessage={errors.userEmail?.message}
           touchedFlieds={touchedFields.userEmail}
+          label="Email or phone number"
+          id="userEmail"
+          type="text"
+          className="w-full"
         />
         <Input
-          className="w-full"
-          label="Password"
-          id="user_password"
-          type="password"
-          register={register("userPassword")}
           errorMessage={errors.userPassword?.message}
           touchedFlieds={touchedFields.userPassword}
+          register={register("userPassword")}
+          label="Password"
+          id="userPassword"
+          type="password"
+          className="w-full"
         />
 
         <Button isLoding={isFormSubmiting}>Next</Button>

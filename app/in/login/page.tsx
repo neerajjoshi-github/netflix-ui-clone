@@ -44,19 +44,19 @@ const page = () => {
                 register={register("userEmail")}
                 errorMessage={errors.userEmail?.message}
                 touchedFlieds={touchedFields.userEmail}
-                className="w-full !border-x-0 !border-t-0 !bg-[#333333]  !border-orange-400"
                 label="Email or phone number"
                 id="user_email"
                 type="text"
+                className="w-full !border-x-0 !border-t-0 !bg-[#333333]  !border-orange-400"
               />
               <Input
                 errorMessage={errors.userPassword?.message}
                 touchedFlieds={touchedFields.userPassword}
                 register={register("userPassword")}
-                className="w-full !border-x-0 !border-t-0 !bg-[#333333]  !border-orange-400"
                 label="Password"
                 id="user_password"
                 type="password"
+                className="w-full !border-x-0 !border-t-0 !bg-[#333333]  !border-orange-400"
               />
             </div>
             <div className="text-zinc-300">
