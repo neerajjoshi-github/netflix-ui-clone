@@ -1,16 +1,18 @@
 "use client";
 import Input from "<@>/components/Input";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { emailPassSchema } from "<@>/lib/zodObjects";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 
 type LoginFormSchemaType = z.infer<typeof emailPassSchema>;
 
 const page = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const {
     register,
@@ -21,9 +23,29 @@ const page = () => {
     mode: "onTouched",
   });
 
-  const onLoginFormSubmit: SubmitHandler<LoginFormSchemaType> = (data) => {
-    console.log(data);
-    router.push("/dashboard");
+  const onLoginFormSubmit: SubmitHandler<LoginFormSchemaType> = async (
+    data
+  ) => {
+    console.log("formData", data);
+    const { userEmail, userPassword } = data;
+    console.log(userEmail, userPassword);
+    try {
+      const signInData = await signIn("credentials", {
+        userEmail,
+        userPassword,
+        redirect: false,
+        callbackUrl: "/dashboard",
+      });
+      if (signInData?.ok && signInData.url) {
+        router.push(signInData.url);
+      }
+      console.log(signInData);
+      if (signInData?.error && !signInData?.ok) {
+        setErrorMessage(signInData?.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="flex items-center justify-center h-screen bg-cover bg-center bg-[url('/netflix-bg1.jpg')]">
@@ -35,9 +57,9 @@ const page = () => {
         </Link>
         <form
           onSubmit={handleSubmit(onLoginFormSubmit)}
-          className="w-full h-full bg-black/70  md:h-[90%] md:w-[420px] lg:h-[85%] px-8 py-12 md:rounded-md"
+          className="w-full h-full bg-black/70 md:h-[90%] md:w-[420px] lg:h-[85%] px-8 py-12 md:rounded-md"
         >
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 mt-6">
             <h1 className="text-4xl font-bold">Sign In</h1>
             <div className="flex flex-col items-center gap-10">
               <Input
@@ -96,6 +118,11 @@ const page = () => {
               </div>
             </div>
           </div>
+          {errorMessage && (
+            <span className="truncate mt-2 flex gap-2 justify-center items-center text-sm text-red-600 font-semibold">
+              {errorMessage}
+            </span>
+          )}
         </form>
       </div>
     </div>

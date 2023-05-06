@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import userSchema from "../../models/user";
 import dbConnect from "<@>/database/dbConnect";
 import bcrypt from "bcrypt";
+import { signIn } from "next-auth/react";
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,5 +33,12 @@ export default async function handler(
     ],
   });
   newUser.save();
+  const signInData = await signIn("credentials", {
+    userEmail,
+    userPassword,
+    redirect: false,
+    callbackUrl: "/dashboard",
+  });
+  console.log("signIn data from register func", signInData);
   res.status(200).json(newUser);
 }
