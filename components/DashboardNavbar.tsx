@@ -71,7 +71,10 @@ const DashboardNavbar = () => {
         })}
       </ul>
 
-      <div onClick={toggleMobileMenu} className="w-6 h-6 lg:hidden">
+      <div
+        onClick={toggleMobileMenu}
+        className="w-6 h-6 lg:hidden cursor-pointer"
+      >
         <GiHamburgerMenu className="w-full h-full" />
       </div>
       {isMobileMenuOpen && (

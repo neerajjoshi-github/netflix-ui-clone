@@ -7,9 +7,8 @@ const Home = () => {
   console.log("Data from use session", data.status);
   if (data.status === "authenticated") {
     redirect("/dashboard");
-  } else if (data.status === "unauthenticated") {
-    redirect("/in");
   }
+  redirect("/in");
 };
 
 export default Home;

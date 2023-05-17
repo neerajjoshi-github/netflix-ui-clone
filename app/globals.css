@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  --plyr-color-main: rgb(220 38 38);
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -74,4 +75,12 @@ input:-webkit-autofill {
 }
 input:-webkit-autofill {
   -webkit-text-fill-color: white !important;
+}
+/* 
+.swiper-slide-active {
+  border: 2px solid white;
+} */
+
+.plyr {
+  height: 70vh;
 }

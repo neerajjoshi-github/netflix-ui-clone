@@ -1,9 +1,10 @@
 "use client";
 import dynamic from "next/dynamic";
-import React, { FC } from "react";
+import React, { FC, useRef, useEffect } from "react";
 import MediaCard from "./MediaCard";
 import { HiChevronDoubleRight } from "react-icons/hi";
 import Link from "next/link";
+import useStore from "<@>/store/store";
 
 const DynamicSwiperComponent = dynamic(() => import("./SwiperSlider"), {
   ssr: false,
@@ -16,10 +17,29 @@ type MoviesListProps = {
 };
 
 const MediaList: FC<MoviesListProps> = ({ data, title, urlParams }) => {
+  const [activeSlideIndex, updateActiveSlideIndex] = useStore((state) => [
+    state.activeSlideIndex,
+    state.updateActiveSlideIndex,
+  ]);
+  // console.log("activeIndex from mediaList", activeSlideIndex);
+  const swiperSlideRef = useRef(null);
+  useEffect(() => {
+    //   // listen for Swiper events using addEventListener
+    //   swiperSlideRef.current.addEventListener("", (e) => {
+    //     const [swiper, progress] = e.detail;
+    //     console.log("progress", e);
+    //   });
+    // swiperSlideRef.current.addEventListener("slidechange", (e) => {
+    //   console.log("slide changed", e.detail[0].isEnd);
+    // });
+  }, []);
+
   return (
-    <div className="mt-8 sm:mt-16 px-2 sm:pl-10 sm:pr-8 ">
+    // mt-8 sm:mt-16
+    <div className="px-2 sm:pl-10 sm:pr-8 border-t border-b border-white ">
       <Link href={`/dashboard/browse/${urlParams}`}>
-        <h2 className="flex gap-1 items-end mb-8">
+        {/* mb-8 */}
+        <h2 className="flex gap-1 items-end ">
           <span className="z-20 cursor-pointer text-2xl sm:text-4xl peer font-semibold">
             {title}
           </span>
@@ -33,10 +53,16 @@ const MediaList: FC<MoviesListProps> = ({ data, title, urlParams }) => {
       </Link>
 
       <DynamicSwiperComponent>
-        {data.map((media: MoviesResult | ShowsResult) => {
+        {data.map((media: MoviesResult | ShowsResult, index) => {
+          // console.log(index, activeSlideIndex);
+          // console.log("activeIndex", activeSlideIndex, "index", index);
           return (
-            <swiper-slide key={media.id}>
-              <MediaCard media={media} />
+            <swiper-slide ref={swiperSlideRef} key={media.id}>
+              <MediaCard
+                media={media}
+                isEnd={activeSlideIndex + 3 === index}
+                isStart={activeSlideIndex === index}
+              />
             </swiper-slide>
           );
         })}

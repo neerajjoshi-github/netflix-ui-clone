@@ -3,12 +3,12 @@ import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 
 const navLinks = [
-  { title: "Home", herf: "/" },
-  { title: "TV Shows", herf: "/shows" },
-  { title: "Movies", herf: "/movies" },
-  { title: "New & Popular", herf: "/new" },
-  { title: "My List", herf: "/my_list" },
-  { title: "Browse by Languages", herf: "/browse_by_languages" },
+  { title: "Home", herf: "/dashboard" },
+  { title: "TV Shows", herf: "/dashboard/shows" },
+  { title: "Movies", herf: "/dashboard/movies" },
+  { title: "New & Popular", herf: "/dashboard/new_and_popular" },
+  { title: "My List", herf: "/dashboard/my_list" },
+  { title: "Browse by Languages", herf: "/dashboard/browse_by_languages" },
 ];
 
 type MobileMenuProps = {
@@ -23,9 +23,9 @@ const MobileMenu: FC<MobileMenuProps> = ({ closeMobileMenu }) => {
         className="absolute top-2 right-2 w-4 h-4 cursor-pointer"
       />
       <ul className="flex flex-col gap-2 items-center">
-        {navLinks.map((link) => {
+        {navLinks.map((link, index) => {
           return (
-            <li className="w-full hover:bg-slate-700 text-center">
+            <li key={index} className="w-full hover:bg-slate-700 text-center">
               <Link className="py-2 cursor-pointer block" href={link.herf}>
                 {link.title}
               </Link>
