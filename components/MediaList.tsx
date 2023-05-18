@@ -36,7 +36,7 @@ const MediaList: FC<MoviesListProps> = ({ data, title, urlParams }) => {
 
   return (
     // mt-8 sm:mt-16
-    <div className="px-2 sm:pl-10 sm:pr-8 border-t border-b border-white ">
+    <div className="px-2 sm:pl-10 sm:pr-8">
       <Link href={`/dashboard/browse/${urlParams}`}>
         {/* mb-8 */}
         <h2 className="flex gap-1 items-end ">

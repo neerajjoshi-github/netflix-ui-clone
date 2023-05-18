@@ -39,3 +39,9 @@ export const fetchTvVideo = async (TvId: string) => {
   );
   return response.json();
 };
+export const fetchByLanguage = async (language: string) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.MOVIESDB_API_KEY}&language=en-US&page=1&with_original_language=${language}`
+  );
+  return response.json();
+};

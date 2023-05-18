@@ -124,12 +124,14 @@ const page = async () => {
                   );
                 })}
               </span>
-              <span>
-                Language : {details.spoken_languages[0].english_name}{" "}
-                {details.spoken_languages[0].english_name !==
-                  details.spoken_languages[0].name &&
-                  details.spoken_languages[0].name}
-              </span>
+              {details.spoken_languages.length !== 0 && (
+                <span>
+                  Language : {details.spoken_languages[0].english_name}{" "}
+                  {details.spoken_languages[0].english_name !==
+                    details.spoken_languages[0].name &&
+                    details.spoken_languages[0].name}
+                </span>
+              )}
             </div>
             <p className="text-lg text-zinc-300">{details.overview}</p>
             {"seasons" in details && (

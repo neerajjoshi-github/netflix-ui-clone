@@ -15,7 +15,9 @@ const ImageBillboard: FC<ImageBillboardProps> = ({ data }) => {
 
         <img
           className="w-full h-[70vh] object-cover object-center"
-          src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+          src={`https://image.tmdb.org/t/p/original/${
+            data.poster_path || data.backdrop_path
+          }`}
           alt=""
         />
         <div className="z-10 absolute bottom-0 left-0 w-[80%] max-w-4xl p-4 flex flex-col gap-4">
