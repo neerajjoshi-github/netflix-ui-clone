@@ -1,10 +1,10 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import UserModal from "../../../models/user";
 import dbConnect from "<@>/database/dbConnect";
 import bcrypt from "bcrypt";
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
@@ -63,4 +63,6 @@ export default NextAuth({
     signIn: "/in/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+export default NextAuth(authOptions);

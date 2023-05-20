@@ -1,13 +1,37 @@
-import { Schema, model, models } from "mongoose";
+import { Schema, model, models, InferSchemaType } from "mongoose";
+
+type FavoriteType = {
+  id: string;
+  mediaType: string;
+};
+
+type ProfileType = {
+  profileName: string;
+  favorites: FavoriteType[];
+};
+
+export type UserType = {
+  userName: string;
+  userEmail: string;
+  userPassword: string;
+  profiles: ProfileType[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+const favoritesSchema = new Schema({
+  id: String,
+  mediaType: String,
+});
 
 const profileSchema = new Schema({
   profileName: {
     type: String,
   },
-  favorites: [String],
+  favorites: [favoritesSchema],
 });
 
-const userSchema = new Schema(
+const userSchema = new Schema<UserType>(
   {
     userName: {
       type: String,
@@ -29,4 +53,4 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-export default models.User || model("User", userSchema);
+export default models.User || model<UserType>("User", userSchema);

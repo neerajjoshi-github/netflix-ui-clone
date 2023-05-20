@@ -14,7 +14,7 @@ module.exports = {
           "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
       },
       gridTemplateColumns: {
-        "responsive-grid": "repeat(auto-fit, minmax(250px, 1fr));",
+        "responsive-grid": "repeat(auto-fill, minmax(250px, 1fr));",
       },
     },
   },
