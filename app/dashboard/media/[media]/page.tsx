@@ -62,23 +62,23 @@ const page = async () => {
       </div>
 
       {details && (
-        <div className="mt-5 pt-8 px-10 flex relative justify-around gap-10 border-t border-gray-200">
+        <div className="mt-5 pt-8 px-1 md:px-4 lg:px-10 grid grid-cols-details grid-row-3 relative gap-1 md:gap-4 lg:gap-10 border-t border-gray-200">
           <img
-            className="object-contain object-top sticky top-32 w-[350px] h-[600px]"
+            className="row-span-1 md:row-span-4 object-contain object-top flex md:sticky md:top-32 bg-blue-400"
             src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
             alt=""
           />
 
-          <div className="text-white flex flex-col gap-6 pb-10">
+          <div className="col-span-2 xs:col-span-1 text-white flex flex-col gap-6">
             {"original_title" in details ? (
-              <h2 className="text-6xl font-semibold">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold">
                 {details.title}{" "}
                 {details.original_title !== details.title && (
                   <span> [ {details.original_title} ]</span>
                 )}
               </h2>
             ) : (
-              <h2 className="text-6xl font-semibold">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold">
                 {details.name}{" "}
                 {details.name !== details.original_name && (
                   <span> [{details.original_name}]</span>
@@ -86,9 +86,9 @@ const page = async () => {
               </h2>
             )}
             {details.tagline && (
-              <h3 className="text-2xl mb-4">{details.tagline}</h3>
+              <h3 className="text-xl md:text-2xl mb-4">{details.tagline}</h3>
             )}
-            <div className="flex flex-col gap-2 text-xl">
+            <div className="flex flex-col gap-1 sm:gap-2 text-sm md:text-lg lg:text-xl">
               {"original_title" in details ? (
                 <>
                   <span className="">
@@ -107,25 +107,27 @@ const page = async () => {
                 </>
               )}
 
-              <span>
+              <span className="">
                 Rating :{" "}
-                <span className="text-green-600">
+                <span className="text-green-600 ">
                   {details.vote_average.toFixed(1)}
                 </span>
               </span>
-              <span className="flex gap-3">
-                Genre :{" "}
-                {details.genres.map((genre, index) => {
-                  return (
-                    <Fragment key={index}>
-                      {index !== 0 ? "|" : ""}
-                      <span>{genre.name}</span>
-                    </Fragment>
-                  );
-                })}
-              </span>
+              <div className="flex">
+                <span className="whitespace-nowrap mr-2">Genre : </span>
+                <div className="flex flex-wrap gap-1 sm:gap-3">
+                  {details.genres.map((genre, index) => {
+                    return (
+                      <Fragment key={index}>
+                        {index !== 0 ? "|" : ""}
+                        <span>{genre.name}</span>
+                      </Fragment>
+                    );
+                  })}
+                </div>
+              </div>
               {details.spoken_languages.length !== 0 && (
-                <span>
+                <span className="">
                   Language : {details.spoken_languages[0].english_name}{" "}
                   {details.spoken_languages[0].english_name !==
                     details.spoken_languages[0].name &&
@@ -133,58 +135,55 @@ const page = async () => {
                 </span>
               )}
             </div>
-            <p className="text-lg text-zinc-300">{details.overview}</p>
-            {"seasons" in details && (
-              <div className="">
-                <h2 className="text-4xl font-semibold my-6">Seasons</h2>
-                <div className="grid grid-cols-5 gap-x-8 gap-y-4">
-                  {details.seasons.map((season, index) => {
-                    return (
-                      <Fragment key={index}>
-                        {season.name !== "Specials" &&
-                          season.episode_count !== 0 && (
-                            <div className="w-full relative pb-6">
-                              <div className="relative group overflow-hidden cursor-pointer w-full">
-                                <img
-                                  className="w-full h-auto"
-                                  src={`https://image.tmdb.org/t/p/original/${season.poster_path}`}
-                                  alt=""
-                                />
-                                <div className="group-hover:opacity-100 opacity-0 flex flex-col gap-2 group-hover:translate-y-0 translate-y-[400px] transition duration-500 absolute bottom-0 py-2 h-3/4 w-full bg-black/70">
-                                  <h3 className="font-semibold truncate">
-                                    {season.name}
-                                  </h3>
-                                  {season.air_date && (
-                                    <span className="text-sm">
-                                      <span className="font-semibold">
-                                        Air Date
-                                      </span>{" "}
-                                      : {season.air_date}
-                                    </span>
-                                  )}
-                                  <p className="text-xs line-clamp-5 ">
-                                    {season.overview}
-                                  </p>
-                                </div>
-                              </div>
-
-                              <span className="block">{season.name}</span>
-                              <span
-                                className={`block ${
-                                  season.poster_path ? "absolute bottom-0" : ""
-                                }`}
-                              >
-                                Episodes - {season.episode_count}
-                              </span>
-                            </div>
-                          )}
-                      </Fragment>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
           </div>
+          <p className="col-span-2 pt-4 md:col-span-1 text-xs sm:text-sm md:text-base lg:text-lg text-zinc-300">
+            {details.overview}
+          </p>
+          {"seasons" in details && (
+            <div className="col-span-2 md:col-span-1">
+              <h2 className="text-4xl font-semibold my-6">Seasons</h2>
+              <div className="grid grid-cols-seasons-grid gap-x-8 gap-y-4">
+                {details.seasons.map((season, index) => {
+                  return (
+                    <Fragment key={index}>
+                      {season.name !== "Specials" &&
+                        season.episode_count !== 0 && (
+                          <div className="w-full relative bg-slate-950">
+                            <div className="relative group overflow-hidden cursor-pointer w-full">
+                              <img
+                                className="w-full h-auto"
+                                src={`https://image.tmdb.org/t/p/original/${season.poster_path}`}
+                                alt=""
+                              />
+                              <div className="group-hover:opacity-100 opacity-0 flex flex-col gap-2 group-hover:translate-y-0 translate-y-[400px] transition duration-500 absolute bottom-0 py-2 h-3/4 w-full bg-black/70">
+                                <h3 className="font-semibold truncate">
+                                  {season.name}
+                                </h3>
+                                {season.air_date && (
+                                  <span className="text-sm">
+                                    <span className="font-semibold">
+                                      Air Date
+                                    </span>{" "}
+                                    : {season.air_date}
+                                  </span>
+                                )}
+                                <p className="text-xs line-clamp-5 ">
+                                  {season.overview}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="flex flex-col gap-1 px-2 pb-2 text-sm sm:text-base">
+                              <span>Season - {season.season_number}</span>
+                              <span>Episodes - {season.episode_count}</span>
+                            </div>
+                          </div>
+                        )}
+                    </Fragment>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

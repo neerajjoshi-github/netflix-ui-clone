@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import MyListButton from "./MyListButton";
 
 type MediaGridProps = {
   data: MoviesResult[] | ShowsResult[];
@@ -45,11 +46,16 @@ const MediaGrid: FC<MediaGridProps> = ({ data, title }) => {
                     Rating :{" "}
                     <span className="text-green-600">{media.vote_average}</span>
                   </span>
-                  <span>
+                  <span className="font-semibold">
                     {"name" in media
                       ? media.first_air_date.slice(0, 4)
                       : media.release_date.slice(0, 4)}
                   </span>
+                  <MyListButton
+                    id={media.id}
+                    textSize="text-xs"
+                    mediaType={"name" in media ? "tv" : "movie"}
+                  />
                 </div>
                 <p className="text-xs max-xl:line-clamp-6">{media.overview}</p>
               </div>

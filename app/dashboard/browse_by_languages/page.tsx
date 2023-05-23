@@ -5,7 +5,6 @@ import { fetchByLanguage } from "<@>/lib/fetch";
 import { languages, LanguagesType } from "<@>/data/languages";
 import ReactSelect, { SingleValue } from "react-select";
 import MediaGrid from "<@>/components/MediaGrid";
-import { BsDatabaseDash } from "react-icons/bs";
 
 const page = () => {
   const [data, setData] = useState<MoviesResult[]>([]);
@@ -42,15 +41,8 @@ const page = () => {
         />
       </div>
       {data.length !== 0 && <ImageBillboard data={data[0]} />}
-      {/* <div className="w-full px-2 sm:px-6">
-        <h2 className="text-6xl font-semibold mb-6">
-          <span className="relative">
-            Movies
-            <span className="absolute bottom-2 h-px w-[85%] right-0 bg-red-600" />
-          </span>
-        </h2> */}
+
       <MediaGrid data={data} title="Movies" />
-      {/* </div> */}
     </div>
   );
 };

@@ -44,14 +44,15 @@ const MediaCard: FC<MovieCardProps> = ({ media, isStart, isEnd }) => {
               </h2>
               <div className="flex items-center text-sm gap-3">
                 <span className="text-green-600 font-semibold ">
-                  {media.vote_average}
+                  {media.vote_average * 10}%
                 </span>
-                <span>
+                <span className="font-semibold">
                   {"name" in media
                     ? media.first_air_date.slice(0, 4)
                     : media.release_date.slice(0, 4)}
                 </span>
                 <MyListButton
+                  buttonClassname="ml-auto"
                   textSize="text-xs"
                   id={media.id}
                   mediaType={"name" in media ? "tv" : "movie"}
