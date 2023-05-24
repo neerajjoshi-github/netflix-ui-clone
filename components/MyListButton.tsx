@@ -36,10 +36,7 @@ const MyListButton: FC<MyListButtonProps> = ({
       setIsFavorite(foundFavorite !== undefined);
     }
   }, [data, id, mediaType]);
-  console.log(
-    "37 mylist button favorite from store my list buttn : ",
-    favorites
-  );
+
   const toggleFavorite = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     id: string | number,
@@ -69,7 +66,6 @@ const MyListButton: FC<MyListButtonProps> = ({
     } else {
       if (mediaType === "movie") {
         const movieData = await fetchMovieDetails(id as string);
-        console.log(favorites, "from inside movies use fee");
         addFavorites({
           movies: [movieData],
           shows: [],
@@ -94,7 +90,7 @@ const MyListButton: FC<MyListButtonProps> = ({
   };
   return (
     <button
-      className={`${buttonClassname} disabled:bg-white/10 disabled:text-zinc-300 z-[30]  flex gap-1 items-center p-1 bg-white/20 hover:bg-white/30 backdrop-blur-lg rounded-sm`}
+      className={`${buttonClassname} disabled:bg-white/10 disabled:text-zinc-300 z-[30]  flex gap-1 items-center justify-center p-1 bg-white/20 hover:bg-white/30 backdrop-blur-lg rounded-sm`}
       onClick={(e) => toggleFavorite(e, id, mediaType)}
       disabled={isLoding}
     >

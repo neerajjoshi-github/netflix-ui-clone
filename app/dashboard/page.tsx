@@ -1,8 +1,6 @@
 import Billboard from "<@>/components/Billboard";
-import DashboardNavbar from "<@>/components/DashboardNavbar";
 import MediaList from "<@>/components/MediaList";
 import React from "react";
-import axios from "axios";
 import { fetchMovies, fetchTv } from "<@>/lib/fetch";
 
 const page = async () => {
@@ -16,6 +14,7 @@ const page = async () => {
   const { results: topRatedShowsResults }: ShowsData = await fetchTv(
     "top_rated"
   );
+
   return (
     <div className="w-screen pb-32">
       <Billboard />
@@ -28,5 +27,3 @@ const page = async () => {
 };
 
 export default page;
-
-// `https://api.themoviedb.org/3/trending/tv/day?api_key=${process.env.MOVIESDB_API_KEY}`

@@ -10,6 +10,7 @@ import React from "react";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
 import { Fragment } from "react";
+import MyListButton from "<@>/components/MyListButton";
 
 const page = async () => {
   const params = useParams();
@@ -21,14 +22,10 @@ const page = async () => {
     const videoData = await fetchMovieVideo(params?.media as string);
     details = await fetchMovieDetails(params?.media as string);
     videoResult = videoData.results[0];
-    console.log("videoData", videoData.results[0]);
-    console.log("details", details);
   } else if (mediaType === "tv") {
     const videoData = await fetchTvVideo(params?.media as string);
     videoResult = videoData.results[0];
     details = await fetchTvDetails(params?.media as string);
-    console.log("Tv videoData", videoData.results[0]);
-    console.log("Tv details", details);
   }
 
   return (
@@ -62,14 +59,13 @@ const page = async () => {
       </div>
 
       {details && (
-        <div className="mt-5 pt-8 px-1 md:px-4 lg:px-10 grid grid-cols-details grid-row-3 relative gap-1 md:gap-4 lg:gap-10 border-t border-gray-200">
+        <div className="mt-5 pt-8 pb-5 px-1 md:px-4 lg:px-10 grid grid-cols-details grid-row-3 relative gap-1 md:gap-x-4 md:gap-y-2  lg:gap-x-10 lg:gap-y-4 border-t border-gray-200">
           <img
             className="row-span-1 md:row-span-4 object-contain object-top flex md:sticky md:top-32 bg-blue-400"
             src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
             alt=""
           />
-
-          <div className="col-span-2 xs:col-span-1 text-white flex flex-col gap-6">
+          <div className="col-span-2 min-w-[180px] ml-2 xs:col-span-1 text-white flex flex-col gap-[0.3rem] md:gap-5">
             {"original_title" in details ? (
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold">
                 {details.title}{" "}
@@ -86,9 +82,9 @@ const page = async () => {
               </h2>
             )}
             {details.tagline && (
-              <h3 className="text-xl md:text-2xl mb-4">{details.tagline}</h3>
+              <h3 className="text-lg md:text-2xl mb-1">{details.tagline}</h3>
             )}
-            <div className="flex flex-col gap-1 sm:gap-2 text-sm md:text-lg lg:text-xl">
+            <div className="flex flex-col gap-1 sm:gap-2 text-sm md:text-lg lg:text-xl mt-1">
               {"original_title" in details ? (
                 <>
                   <span className="">
@@ -113,18 +109,17 @@ const page = async () => {
                   {details.vote_average.toFixed(1)}
                 </span>
               </span>
-              <div className="flex">
+              <div className="flex flex-wrap gap-1 sm:gap-3">
                 <span className="whitespace-nowrap mr-2">Genre : </span>
-                <div className="flex flex-wrap gap-1 sm:gap-3">
-                  {details.genres.map((genre, index) => {
-                    return (
-                      <Fragment key={index}>
-                        {index !== 0 ? "|" : ""}
-                        <span>{genre.name}</span>
-                      </Fragment>
-                    );
-                  })}
-                </div>
+
+                {details.genres.map((genre, index) => {
+                  return (
+                    <Fragment key={index}>
+                      {index !== 0 ? "|" : ""}
+                      <span>{genre.name}</span>
+                    </Fragment>
+                  );
+                })}
               </div>
               {details.spoken_languages.length !== 0 && (
                 <span className="">
@@ -135,8 +130,14 @@ const page = async () => {
                 </span>
               )}
             </div>
+            <MyListButton
+              buttonClassname="max-w-[180px] lg:max-w-[250px]"
+              textSize="text-base"
+              id={details.id}
+              mediaType={"original_title" in details ? "movie" : "tv"}
+            />
           </div>
-          <p className="col-span-2 pt-4 md:col-span-1 text-xs sm:text-sm md:text-base lg:text-lg text-zinc-300">
+          <p className="col-span-2 pt-4 md:pt-2 md:col-span-1 ml-2 text-xs sm:text-sm md:text-base lg:text-lg text-zinc-300">
             {details.overview}
           </p>
           {"seasons" in details && (

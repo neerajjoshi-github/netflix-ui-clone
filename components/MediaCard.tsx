@@ -17,22 +17,22 @@ const MediaCard: FC<MovieCardProps> = ({ media, isStart, isEnd }) => {
 
   return (
     <div
-      className={`${isEnd ? "hover:-translate-x-12 " : ""}
-      ${isStart ? "hover:translate-x-12 " : ""} 
-      cursor-pointer py-10 hover:scale-125 hover:z-[1] transition duration-500 group relative `}
+      className={`${isEnd ? "lg:hover:-translate-x-12 " : ""}
+      ${isStart ? "lg:hover:translate-x-12 " : ""} 
+      cursor-pointer py-10 lg:hover:scale-125 hover:z-[1] transition duration-500 group relative `}
     >
       <Link
-        href={`/dashboard/media/${media.id}?medaiType=${
+        href={`/dashboard/watch/${media.id}?medaiType=${
           "name" in media ? "tv" : "movie"
         }`}
       >
-        <div className="flex  h-[24vh] sm:h-[32vh] group-hover:border-white group-hover:border hover:rounded-t-md">
+        <div className="flex h-[24vh] sm:h-[32vh] group-hover:border-white border border-transparent hover:rounded-t-md">
           <img
-            className="group-hover:hidden w-full h-full object-cover object-center rounded-md"
+            className="lg:group-hover:hidden w-full h-full object-cover object-center rounded-md"
             src={`https://image.tmdb.org/t/p/original/${media.poster_path}`}
             alt={"name" in media ? media.name : media.title}
           />
-          <div className="overflow-hidden group-hover:flex flex-col hidden w-full h-full bg-black rounded-t-md">
+          <div className="overflow-hidden lg:group-hover:flex flex-col hidden w-full h-full bg-black rounded-t-md">
             <img
               className="w-full h-[65%] object-cover object-top rounded-t-md"
               src={`https://image.tmdb.org/t/p/original/${media.poster_path}`}
