@@ -4,6 +4,16 @@ import UserModal from "../../../models/user";
 import dbConnect from "<@>/database/dbConnect";
 import bcrypt from "bcrypt";
 
+type FavoriteType = {
+  id: string;
+  mediaType: string;
+};
+
+type ProfileType = {
+  profileName: string;
+  favorites: FavoriteType[];
+};
+
 export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
@@ -49,7 +59,13 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
-      session.user = token.user as { email: string; name: string };
+      session.user = token.user as {
+        userName: string;
+        userEmail: string;
+        userPassword: string;
+        profiles: ProfileType[];
+        _id: string;
+      };
       return session;
     },
     async jwt({ token, user }) {
