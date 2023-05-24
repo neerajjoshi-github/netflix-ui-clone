@@ -13,17 +13,13 @@ const SwiperSlide: FC<SwiperSlideProps> = ({ children }) => {
     state.activeSlideIndex,
     state.updateActiveSlideIndex,
   ]);
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<any>(null);
   useEffect(() => {
-    // listen for Swiper events using addEventListener
-    // swiperRef.current.addEventListener("progress", (e) => {
-    //   const [swiper, progress] = e.detail;
-    //   console.log("progress active Index", e.detail[0].activeIndex);
-    // });
-    swiperRef.current.addEventListener("slidechange", (e) => {
-      console.log("slide changed", e.detail[0].realIndex);
-      updateActiveSlideIndex(e.detail[0].realIndex);
-    });
+    if (swiperRef.current)
+      swiperRef.current.addEventListener("slidechange", (e: any) => {
+        console.log("slide changed", e.detail[0].realIndex);
+        updateActiveSlideIndex(e.detail[0].realIndex);
+      });
   }, []);
   return (
     <swiper-container

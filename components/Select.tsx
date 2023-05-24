@@ -1,5 +1,10 @@
 import ReactSelect from "react-select";
 
+type OptionsType = {
+  value: string;
+  label: string;
+};
+
 const Select = ({
   options,
   register,
@@ -10,7 +15,7 @@ const Select = ({
 }: any) => {
   return (
     <ReactSelect
-      value={options.find((c) => c.value === value)}
+      value={options.find((option: OptionsType) => option.value === value)}
       onChange={(val) => onChange(val.value)}
       inputId={inputRef}
       unstyled
