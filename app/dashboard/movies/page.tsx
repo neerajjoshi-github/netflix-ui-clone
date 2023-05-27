@@ -22,7 +22,7 @@ const page = async () => {
       Math.floor(Math.random() * popularMoviesResults.length)
     ];
   return (
-    <div className="pb-32">
+    <div className="pb-12">
       <ImageBillboard data={randomResult} />
       <MediaList data={popularMoviesResults} title="Popular Movies" />
       <MediaList data={topRatedMoviesResults} title="Top Rated Movies" />

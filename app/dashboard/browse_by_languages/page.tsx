@@ -22,7 +22,7 @@ const page = () => {
     if (e) fetchData(e.value);
   };
   return (
-    <div className="pb-32 relative">
+    <div className="pb-12 relative">
       <div className="absolute top-24 right-10 z-[20]">
         <ReactSelect
           options={languages}

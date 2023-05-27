@@ -16,7 +16,7 @@ const page = async () => {
   );
 
   return (
-    <div className="w-screen pb-32">
+    <div className="w-full pb-12">
       <Billboard />
       <MediaList title="See Again" data={topRatedMoviesResults} />
       <MediaList title="Popular Movies" data={popularMoviesResults} />

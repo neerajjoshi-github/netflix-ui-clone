@@ -19,9 +19,9 @@ type MoviesListProps = {
 const MediaList: FC<MoviesListProps> = ({ data, title, urlParams }) => {
   const activeSlideIndex = useStore((state) => state.activeSlideIndex);
   return (
-    <div className="px-2 sm:pl-10 sm:pr-8">
+    <div className="mx-2 overflow-hidden sm:ml-10 sm:mr-4">
       <Link href={`/dashboard/browse/${urlParams}`}>
-        <h2 className="flex gap-1 items-end ">
+        <h2 className="inline-flex gap-1 items-end">
           <span className="z-20 cursor-pointer text-2xl sm:text-4xl peer font-semibold">
             {title}
           </span>

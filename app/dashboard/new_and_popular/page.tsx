@@ -15,7 +15,7 @@ const page = async () => {
   const randomResult =
     onAirShowsResults[Math.floor(Math.random() * onAirShowsResults.length)];
   return (
-    <div className="pb-32">
+    <div className="pb-12">
       <ImageBillboard data={randomResult} />
       <MediaList data={onAirShowsResults} title="Shows Airing Now" />
       <MediaList data={onAirMoviesResults} title="Newly Arrived Movies" />
