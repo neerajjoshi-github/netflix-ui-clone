@@ -6,21 +6,17 @@ import { IoIosArrowDown } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import AccountMenu from "./AccountMenu";
 import MobileMenu from "./MobileMenu";
+import { navLinks } from "<@>/data/navLinks";
+import { usePathname } from "next/navigation";
+import Search from "./Search";
 
 const TOP_OFFSET = 66;
 
-const navLinks = [
-  { title: "Home", herf: "/dashboard" },
-  { title: "TV Shows", herf: "/dashboard/shows" },
-  { title: "Movies", herf: "/dashboard/movies" },
-  { title: "New & Popular", herf: "/dashboard/new_and_popular" },
-  { title: "My List", herf: "/dashboard/my_list" },
-  { title: "Browse by Languages", herf: "/dashboard/browse_by_languages" },
-];
-
 const DashboardNavbar = () => {
+  const pathname = usePathname();
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
 
   const toggleAccountMenu = () => {
@@ -31,6 +27,9 @@ const DashboardNavbar = () => {
     setIsAccountMenuOpen(false);
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > TOP_OFFSET) {
@@ -39,9 +38,7 @@ const DashboardNavbar = () => {
         setShowBackground(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -52,6 +49,9 @@ const DashboardNavbar = () => {
         showBackground ? "bg-zinc-900/90 backdrop-blur-md " : "bg-transparent"
       } fixed top-0 left-0 transition duration-300 w-full z-40 max-sm:py-2 max-sm:px-2 py-4 px-10 flex items-center`}
     >
+      {isSearchOpen && (
+        <Search closeSearchModal={() => setIsSearchOpen(false)} />
+      )}
       <Link
         className="max-lg:absolute max-sm:top-6 max-lg:top-8 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:-translate-y-1/2"
         href="/"
@@ -64,7 +64,14 @@ const DashboardNavbar = () => {
       <ul className="hidden lg:flex gap-4 ml-8">
         {navLinks.map((link) => {
           return (
-            <li key={link.title} className="text-zinc-200 hover:text-white">
+            <li
+              key={link.title}
+              className={`${
+                pathname === link.herf
+                  ? "font-bold text-white"
+                  : "text-zinc-300 hover:text-white"
+              } `}
+            >
               <Link href={link.herf}>{link.title}</Link>
             </li>
           );
@@ -86,7 +93,10 @@ const DashboardNavbar = () => {
       )}
 
       <div className="flex gap-4 md:gap-6 ml-auto items-center">
-        <div className="h-4 w-4 md:w-5 md:h-5 cursor-pointer">
+        <div
+          onClick={toggleSearch}
+          className="h-4 w-4 md:w-5 md:h-5 cursor-pointer"
+        >
           <BsSearch className="w-full h-full" />
         </div>
         <div className="h-4 w-4 max-md:hidden md:w-5 md:h-5 cursor-pointer">

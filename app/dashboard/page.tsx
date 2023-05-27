@@ -2,6 +2,7 @@ import Billboard from "<@>/components/Billboard";
 import MediaList from "<@>/components/MediaList";
 import React from "react";
 import { fetchMovies, fetchTv } from "<@>/lib/fetch";
+import Search from "<@>/components/Search";
 
 const page = async () => {
   const { results: popularMoviesResults }: MoviesData = await fetchMovies(
