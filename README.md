@@ -12,5 +12,5 @@ https://neerajjoshi-project.vercel.app/
 
 ## Screenshots
 
-![Dashboard Page](/public/readmeImages/dashboard.png)
-![Mobile Dashboard Page](/public/readmeImages/mobile-dashboard.jpeg)
+![Dashboard Page](/public/readmeImages/1.png)
+![Dashboard Page](/public/readmeImages/2.png)
