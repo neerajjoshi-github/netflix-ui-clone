@@ -56,8 +56,8 @@ const Page = () => {
   console.log("favorites from store my list: ", favorites);
 
   return (
-    <div className="py-20 h-screen">
-      <div className="px-2 sm:px-10 h-full">
+    <div className="py-20 flex min-h-screen">
+      <div className="px-2 sm:px-10 flex-1 ">
         {favorites.movies.length === 0 && favorites.shows.length === 0 && (
           <div className="w-full h-full flex flex-col gap-6 justify-center items-center">
             <h3 className="text-4xl sm:text-6xl md:text-7xl font-semibold">

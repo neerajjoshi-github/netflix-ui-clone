@@ -2,6 +2,7 @@ import React, { FC, Fragment } from "react";
 import { genres } from "<@>/data/genres";
 import Link from "next/link";
 import MyListButton from "./MyListButton";
+import { useRouter } from "next/navigation";
 
 type MovieCardProps = {
   media: MoviesResult | ShowsResult;
@@ -14,6 +15,7 @@ const MediaCard: FC<MovieCardProps> = ({ media, isStart, isEnd }) => {
   for (let i = 0; i < media.genre_ids.length; i++) {
     currenMediaGenres.push(genres[media.genre_ids[i]]);
   }
+  const router = useRouter();
 
   return (
     <div

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, FC, useRef } from "react";
 import { fetchBySearch } from "<@>/lib/fetch";
-import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
@@ -27,7 +26,7 @@ const Search: FC<SearchType> = ({ closeSearchModal }) => {
           onClick={closeSearchModal}
           className="absolute top-2 right-2 w-4 h-4 cursor-pointer hover:text-red-600 "
         />
-
+        <h2 className="text-2xl font-semibold">Search....</h2>
         <div>
           <label className="sr-only" htmlFor="search">
             Search
@@ -59,7 +58,7 @@ const Search: FC<SearchType> = ({ closeSearchModal }) => {
                     closeSearchModal();
                   }}
                   key={media.id + index}
-                  className="h-1/3 w-full py-2 flex gap-2 border-b border-white cursor-pointer "
+                  className="h-1/3 w-full py-1 sm:py-2 flex gap-2 border-b border-white cursor-pointer "
                 >
                   <div className="h-full w-1/4">
                     <img
@@ -88,7 +87,7 @@ const Search: FC<SearchType> = ({ closeSearchModal }) => {
                           : media?.release_date?.slice(0, 4)}
                       </span>
                     </div>
-                    <p className="text-xs line-clamp-3 mt-2">
+                    <p className="text-xs line-clamp-2 sm:line-clamp-3 mt-1 sm:mt-2">
                       {media.overview}
                     </p>
                   </div>
