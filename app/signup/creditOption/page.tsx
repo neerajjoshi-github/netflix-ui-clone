@@ -61,7 +61,7 @@ const page = () => {
   const [choosedPlan] = useStore((state) => [state.selectedPlan]);
   const onCreditFormSubmit: SubmitHandler<FormSchemaType> = (data) => {
     console.log(data);
-    router.push("/dashboard");
+    router.push("/profiles");
   };
 
   return (

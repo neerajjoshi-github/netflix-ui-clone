@@ -40,7 +40,7 @@ const page = () => {
   const onCreditFormSubmit: SubmitHandler<UpiFormSchemaType> = (data) => {
     console.log("HELLO");
     console.log(data);
-    router.push("/dashboard");
+    router.push("/profiles");
   };
 
   return (

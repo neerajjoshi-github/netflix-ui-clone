@@ -17,9 +17,11 @@ const MediaGrid: FC<MediaGridProps> = ({ data, title }) => {
         </span>
       </h2>
       <div className="w-full grid grid-cols-2 sm:grid-cols-responsive-grid gap-x-2 gap-y-3 sm:gap-x-4 sm:gap-y-6">
-        {data.map((media) => {
+        {data.map((media, index) => {
           return (
             <Link
+              shallow
+              key={media.id + index}
               href={`/dashboard/watch/${media.id}?medaiType=${
                 "name" in media ? "tv" : "movie"
               }`}

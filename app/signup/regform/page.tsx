@@ -8,8 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { emailPassSchema } from "<@>/lib/zodObjects";
-import Link from "next/link";
-import axios, { AxiosError, isAxiosError } from "axios";
+import axios, { isAxiosError } from "axios";
 
 const regFormSchema = emailPassSchema.extend({
   userName: z

@@ -22,6 +22,7 @@ const MediaCard: FC<MovieCardProps> = ({ media, isStart, isEnd }) => {
       cursor-pointer py-10 lg:hover:scale-125 hover:z-[1] transition duration-500 group relative `}
     >
       <Link
+        shallow
         href={`/dashboard/watch/${media.id}?medaiType=${
           "name" in media ? "tv" : "movie"
         }`}

@@ -1,26 +1,12 @@
+"use client";
 import React from "react";
 import Link from "next/link";
-
-const profilesData = [
-  {
-    profileImageUrl: "/images/profiles/profile1.png",
-    profileName: "Luca",
-  },
-  {
-    profileImageUrl: "/images/profiles/profile2.png",
-    profileName: "Amara",
-  },
-  {
-    profileImageUrl: "/images/profiles/profile3.png",
-    profileName: "Jayden",
-  },
-  {
-    profileImageUrl: "/images/profiles/profile4.png",
-    profileName: "Eliana",
-  },
-];
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const page = () => {
+  const router = useRouter();
+  const { data } = useSession();
   return (
     <div className="relative flex h-screen items-center justify-center">
       <Link className="absolute top-4 left-4" href="/">
@@ -33,12 +19,16 @@ const page = () => {
         <div className="flex flex-col items-center gap-10">
           <h1 className="text-5xl font-semibold">Who's wacthing?</h1>
           <div className="flex gap-4 flex-wrap items-center justify-center">
-            {profilesData.map((data) => {
+            {data?.user.profiles.map((data, index) => {
               return (
-                <div className="flex flex-col gap-2 items-center cursor-pointer group">
+                <div
+                  onClick={() => router.push("/dashboard")}
+                  key={index}
+                  className="flex flex-col gap-2 items-center cursor-pointer group"
+                >
                   <img
                     className="w-32 h-32 object-cover object-center border border-transparent group-hover:border-white"
-                    src={data.profileImageUrl}
+                    src="/images/profiles/profile4.png"
                     alt={`Profile Image ${data.profileName}`}
                   />
                   <span className="text-lg text-zinc-300 font-semibold group-hover:text-white">
@@ -48,7 +38,10 @@ const page = () => {
               );
             })}
           </div>
-          <button className="text-lg w-[85%] px-4 py-2 border border-gray-300 hover:bg-slate-900 ">
+          <button
+            disabled
+            className="disabled:cursor-not-allowed disabled:text-zinc-400 text-lg w-[85%] px-4 py-2 border border-gray-300 hover:bg-slate-900 "
+          >
             Manage Profiles
           </button>
         </div>
