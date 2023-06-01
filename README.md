@@ -13,8 +13,8 @@ https://neerajjoshi-project.vercel.app/
 
 ## Screenshots
 
-Big Screens
+**Big Screens**
 ![Dashboard Page](/public/readmeImages/1.png)
 
-Mobile Screens
+**Mobile Screens**
 ![Dashboard Page](/public/readmeImages/2.png)
