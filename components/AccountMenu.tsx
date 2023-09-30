@@ -16,7 +16,7 @@ const AccountMenu: FC<AccountMenuProps> = ({ closeAccountMenu }) => {
         onClick={closeAccountMenu}
         className="absolute top-2 right-2 w-4 h-4 cursor-pointer"
       />
-      <div className="flex items-center gap-4 group cursor-pointer">
+      <div className="flex items-center gap-4">
         <div className="w-8 h-8">
           <img
             className="w-full h-full object-cover rounded-md"
@@ -24,15 +24,15 @@ const AccountMenu: FC<AccountMenuProps> = ({ closeAccountMenu }) => {
             alt="profile_icon"
           />
         </div>
-        <span className="group-hover:underline underline-offset-2">
+        <span className="underline underline-offset-2">
           {data?.user.userName}
         </span>
       </div>
-      <div className="flex items-center cursor-pointer group py-2 px-2 hover:bg-slate-700">
+      <div className="flex items-center cursor-not-allowed group py-2 px-2 hover:bg-slate-700">
         <span>Account Settings</span>
         <AiOutlineSetting className="ml-auto group-hover:rotate-90 transition duration-500" />
       </div>
-      <div className="flex items-center cursor-pointer group py-2 px-2 hover:bg-slate-700">
+      <div className="flex items-center cursor-not-allowed group py-2 px-2 hover:bg-slate-700">
         <span>Profile Settings</span>
         <AiOutlineSetting className="ml-auto group-hover:rotate-90 transition duration-500 " />
       </div>

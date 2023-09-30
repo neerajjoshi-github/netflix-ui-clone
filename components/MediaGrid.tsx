@@ -20,20 +20,19 @@ const MediaGrid: FC<MediaGridProps> = ({ data, title }) => {
         {data.map((media, index) => {
           return (
             <Link
-              shallow
               key={media.id + index}
               href={`/dashboard/watch/${media.id}?medaiType=${
                 "name" in media ? "tv" : "movie"
               }`}
             >
               <div
-                className="w-full bg-slate-950 relative group cursor-pointer overflow-hidden"
+                className="w-full h-full bg-slate-950 relative group cursor-pointer overflow-hidden"
                 key={media.id + ("name" in media ? media.name : media.title)}
               >
                 {(media.backdrop_path || media.poster_path) && (
                   <img
-                    className="w-full h-auto"
-                    src={`https://image.tmdb.org/t/p/original/${
+                    className="w-full h-full object-cover"
+                    src={`https://image.tmdb.org/t/p/w780/${
                       media.poster_path || media.backdrop_path
                     }`}
                     alt={"name" in media ? media.name : media.title}
@@ -42,9 +41,9 @@ const MediaGrid: FC<MediaGridProps> = ({ data, title }) => {
                 <div
                   className={`${
                     media.backdrop_path || media.poster_path
-                      ? "opacity-0 group-hover:opacity-100 bg-black/70"
-                      : "opacity-100 bg-white/10"
-                  } absolute bottom-0 left-0 px-2 w-full h-3/4  duration-500`}
+                      ? "absolute bottom-0 left-0 w-full h-3/4  duration-500 transition opacity-0 group-hover:opacity-100 bg-black/70"
+                      : "opacity-100 bg-white/10 h-full flex flex-col  justify-center"
+                  }  p-2`}
                 >
                   <h3 className="font-semibold mb-3">
                     {"name" in media ? media.name : media.title}
@@ -58,8 +57,8 @@ const MediaGrid: FC<MediaGridProps> = ({ data, title }) => {
                     </span>
                     <span className="font-semibold">
                       {"name" in media
-                        ? media.first_air_date.slice(0, 4)
-                        : media.release_date.slice(0, 4)}
+                        ? media?.first_air_date?.slice(0, 4)
+                        : media?.release_date?.slice(0, 4)}
                     </span>
                     <MyListButton
                       id={media.id}

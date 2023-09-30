@@ -30,11 +30,6 @@ export const languages: LanguagesType[] = [
     name: "",
   },
   {
-    value: "av",
-    label: "Avaric",
-    name: "",
-  },
-  {
     value: "de",
     label: "German",
     name: "Deutsch",

@@ -11,6 +11,10 @@ type SearchType = {
 const Search: FC<SearchType> = ({ closeSearchModal }) => {
   const router = useRouter();
   const [results, setResults] = useState<ShowsResult[] | MoviesResult[]>([]);
+  const onChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const data = await fetchBySearch(e.target.value);
+    setResults(data.results);
+  };
   return (
     <div
       onClick={() => {
@@ -32,11 +36,7 @@ const Search: FC<SearchType> = ({ closeSearchModal }) => {
             Search
           </label>
           <input
-            onChange={async (e) => {
-              console.log(e.target.value);
-              const data = await fetchBySearch(e.target.value);
-              setResults(data.results);
-            }}
+            onChange={onChangeHandler}
             className="w-full bg-transparent border border-white text-lg p-2"
             placeholder="Last of Us"
             id="serach"
@@ -61,13 +61,21 @@ const Search: FC<SearchType> = ({ closeSearchModal }) => {
                   className="h-1/3 w-full py-1 sm:py-2 flex gap-2 border-b border-white cursor-pointer "
                 >
                   <div className="h-full w-1/4">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={`https://image.tmdb.org/t/p/original/${
-                        media.poster_path || media.backdrop_path
-                      }`}
-                      alt={"name" in media ? media.name : media.title}
-                    />
+                    {media.backdrop_path || media.backdrop_path ? (
+                      <img
+                        className="w-full h-full object-cover"
+                        src={`https://image.tmdb.org/t/p/w342/${
+                          media.poster_path || media.backdrop_path
+                        }`}
+                        alt={"name" in media ? media.name : media.title}
+                      />
+                    ) : (
+                      <div className="w-full h-full p-4 bg-slate-800 flex items-center justify-center">
+                        <p className="truncate text-white font-semibold text-xs">
+                          {"name" in media ? media.name : media.title}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   <div className="h-full flex-1 pr-2">
                     <h3 className="text-xl line-clamp-1">

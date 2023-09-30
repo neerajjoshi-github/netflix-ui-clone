@@ -53,8 +53,6 @@ type MoviesResult = {
   vote_average: number;
 };
 
-// HELLO
-
 type MovieDetails = {
   adult: boolean;
   backdrop_path: string;
@@ -192,4 +190,17 @@ type SpokenLanguage = {
   english_name: string;
   iso_639_1: string;
   name: string;
+};
+
+type VideoResult = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: Date;
+  id: string;
 };

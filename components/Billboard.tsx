@@ -1,8 +1,11 @@
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 import { IoMdAdd } from "react-icons/io";
+import { billboarddata } from "<@>/data/billboardData";
 
 const Billboard = () => {
+  const data =
+    billboarddata[Math.round(Math.random() * (billboarddata.length - 1))];
   return (
     <div className="relative h-[70vh] w-full">
       <div className="w-full h-1/2 z-10 bg-black-gradient-down absolute bottom-0 left-0"></div>
@@ -11,25 +14,24 @@ const Billboard = () => {
         autoPlay
         muted
         loop
-        poster="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg"
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+        poster={data.poster}
+        src={data.sources}
       ></video>
       <div className="z-10 absolute bottom-0 left-0 w-[80%] max-w-4xl p-4 flex flex-col gap-4">
-        <h2 className="text-7xl sm:text-8xl font-bold">Sintel</h2>
-        <p className="text-xs sm:text-sm md:text-base">
-          Sintel is an independently produced short film, initiated by the
-          Blender Foundation as a means to further improve and validate the
-          free/open source 3D creation suite Blender. With initial funding
-          provided by 1000s of donations via the internet community, it has
-          again proven to be a viable development model for both open 3D
-          technology as for independent animation film.
-        </p>
+        <h2 className="text-7xl sm:text-8xl font-bold">{data.title}</h2>
+        <p className="text-xs sm:text-sm md:text-base">{data.description}</p>
         <div className="flex gap-4">
-          <button className="flex gap-1 items-center bg-white hover:bg-zinc-100 text-black px-4 py-2 rounded-md">
+          <button
+            title="Does nothing!!"
+            className="flex gap-1 items-center bg-white hover:bg-zinc-100 text-black px-4 py-2 rounded-md"
+          >
             <BsFillPlayFill className="w-5 h-5" />
             <span className="font-semibold">Play</span>
           </button>
-          <button className="flex gap-1 items-center px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-lg rounded-md">
+          <button
+            title="Does nothing!!"
+            className="flex gap-1 items-center px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-lg rounded-md"
+          >
             <IoMdAdd className="w-5 h-5" />
             <span className="font-semibold">My List</span>
           </button>
