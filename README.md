@@ -27,12 +27,14 @@ Check out the live demo deployed on Vercel: [Netflix Clone Demo](https://netflix
 ### Desktop View
 
 ![Desktop View Screenshot](/public/readmeImages/desktop-view-1.png)
+
+<br>
+
 ![Desktop View Screenshot](/public/readmeImages/desktop-view-2.png)
 
 ### Mobile View
 
 ![Mobile View Screenshot](/public/readmeImages/mobile-view-1.png)
-![Mobile View Screenshot](/public/readmeImages/mobile-view-2.png)
 
 ## Run Locally
 
